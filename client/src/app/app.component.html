@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>List of Products</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <input type="text" class="form-control mb-2" [(ngModel)]="actualProduct.name" placeholder="Name">
+    </div>
+    <div class="col-md-4">
+      <input type="number" class="form-control mb-2" [(ngModel)]="actualProduct.price" placeholder="Price">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary mb-2" (click)="addProduct(actualProduct)">Add Product</button>
+    </div>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let product of products">
+      {{ product.name }} - {{ product.price }}
+      <button class="btn btn-sm btn-info mx-2" (click)="editProduct(product)">Edit</button>
+      <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+    </li>
+  </ul>
+  <div class="card" *ngIf="isEditing">
+    <div class="card-header">
+      <h2>{{ isEditing ? 'Edit Product' : 'Add Product' }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <input type="text" class="form-control mb-2" [(ngModel)]="selectedProduct.name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control mb-2" [(ngModel)]="selectedProduct.price" placeholder="Price">
+      </div>
+      <button class="btn btn-primary mr-2" (click)="isEditing ? updateProduct() : addProduct(actualProduct)">
+        {{ isEditing ? 'Update' : 'Add' }}
+      </button>
+      <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
